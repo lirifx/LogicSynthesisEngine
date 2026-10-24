@@ -5,7 +5,7 @@
 # LSE — Logic Synthesis Engine (Python, single file)
 
 `lse.py` reads a Boolean function via and input file or command line, then minimizes and analyzes it using a maximum of 12 operations listed below.
-The code then  writes **structural Verilog** (primitive gates only) with a self-checking testbench. The code also writes 2 sets of  **FPGA files** . The first file (xxx_hdlboard.v) runs on the HDLBoard an online FPGA simulator (https://hdlboard.onrender.com/) using their Terasic DE1-SoC FPGA board.  The next set of files (xxx_nexysa7.v) run on the **Diligent Nexys A7** FPGA board  and includes the verilog file and a xxx_nexysa7.xdc file with the pin constraints.
+The code then  writes **structural Verilog** (primitive gates only) with a self-checking testbench. The code also writes 2 sets of  **FPGA files** . The first file (xxx_hdlboard.v) runs on the HDLBoard an online FPGA simulator (https://hdlboard.onrender.com/) using their Terasic DE1-SoC FPGA board.  The next set of files (xxx_nexysa7.v) will run on the **Diligent Nexys A7** FPGA board  and includes the verilog file and a xxx_nexysa7.xdc file with the pin constraints.
 
 The code has been tested with two examples, a 7 segment display and a full adder and the input files for these are in the examples folder,
 
@@ -136,6 +136,7 @@ Python 3.8+, no packages to install.
 
 
 ## Code structure (`lse.py`)
+![lse.py architecture: 11 classes in 4 stages](docs/architecture.png)
 The main classes in the code are described below
 | Class | Role |
 |---|---|
