@@ -1,4 +1,4 @@
-# EC551 Programming HW 1 
+# EC551 Programming Assignment 1 - Logic Synthesis Engine 
 ## Contact Name: Francis Liri
 ## Partner Name: Tanner Armstard
 
