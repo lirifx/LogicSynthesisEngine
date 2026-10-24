@@ -1,1 +1,6 @@
-
+# ABC-style EQN: multi-level, multi-output full adder with internal signal p
+INORDER = a b cin;
+OUTORDER = sum cout;
+p    = a ^ b;
+sum  = p ^ cin;
+cout = a*b + p*cin;
