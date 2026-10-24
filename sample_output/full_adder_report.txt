@@ -1,0 +1,154 @@
+Design 'full_adder'
+  inputs  (3): a b cin
+  outputs (2): sum cout
+    sum: ON=4 OFF=4 DC=0
+    cout: ON=4 OFF=4 DC=0
+------------------------------------------------------------------------
+[1] Canonical SOP -- sum(a, b, cin)
+  sum = Σm(1, 2, 4, 7)
+  sum = a'*b'*cin + a'*b*cin' + a*b'*cin' + a*b*cin
+  minterms: 4   literals: 12
+
+[1] Canonical SOP -- cout(a, b, cin)
+  cout = Σm(3, 5, 6, 7)
+  cout = a'*b*cin + a*b'*cin + a*b*cin' + a*b*cin
+  minterms: 4   literals: 12
+
+------------------------------------------------------------------------
+[2] Canonical POS -- sum(a, b, cin)
+  sum = ΠM(0, 3, 5, 6)
+  sum = (a + b + cin) * (a + b' + cin') * (a' + b + cin') * (a' + b' + cin)
+  maxterms: 4   literals: 12
+
+[2] Canonical POS -- cout(a, b, cin)
+  cout = ΠM(0, 1, 2, 4)
+  cout = (a + b + cin) * (a + b + cin') * (a + b' + cin) * (a' + b + cin)
+  maxterms: 4   literals: 12
+
+------------------------------------------------------------------------
+[3] Inverse canonical SOP -- sum(a, b, cin)
+  sum' = Σm(0, 3, 5, 6)
+  sum' = a'*b'*cin' + a'*b*cin + a*b'*cin + a*b*cin'
+  minterms: 4   literals: 12
+
+[3] Inverse canonical SOP -- cout(a, b, cin)
+  cout' = Σm(0, 1, 2, 4)
+  cout' = a'*b'*cin' + a'*b'*cin + a'*b*cin' + a*b'*cin'
+  minterms: 4   literals: 12
+
+------------------------------------------------------------------------
+[4] Inverse canonical POS -- sum(a, b, cin)
+  sum' = ΠM(1, 2, 4, 7)
+  sum' = (a + b + cin') * (a + b' + cin) * (a' + b + cin) * (a' + b' + cin')
+  maxterms: 4   literals: 12
+
+[4] Inverse canonical POS -- cout(a, b, cin)
+  cout' = ΠM(3, 5, 6, 7)
+  cout' = (a + b' + cin') * (a' + b + cin') * (a' + b' + cin) * (a' + b' + cin')
+  maxterms: 4   literals: 12
+
+------------------------------------------------------------------------
+[5] Literal-minimized SOP -- sum(a, b, cin)
+  sum = a*b*cin + a*b'*cin' + a'*b*cin' + a'*b'*cin
+  terms: 4   literals: 12
+  canonical SOP literals: 12  ->  saved 0 literals (0.0%)
+
+[5] Literal-minimized SOP -- cout(a, b, cin)
+  cout = a*b + a*cin + b*cin
+  terms: 3   literals: 6
+  canonical SOP literals: 12  ->  saved 6 literals (50.0%)
+
+------------------------------------------------------------------------
+[6] Literal-minimized POS -- sum(a, b, cin)
+  sum = (a' + b' + cin) * (a' + b + cin') * (a + b' + cin') * (a + b + cin)
+  clauses: 4   literals: 12
+  canonical POS literals: 12  ->  saved 0 literals (0.0%)
+  (from minimizing sum' = a*b*cin' + a*b'*cin + a'*b*cin + a'*b'*cin' and applying De Morgan)
+
+[6] Literal-minimized POS -- cout(a, b, cin)
+  cout = (a + b) * (a + cin) * (b + cin)
+  clauses: 3   literals: 6
+  canonical POS literals: 12  ->  saved 6 literals (50.0%)
+  (from minimizing cout' = a'*b' + a'*cin' + b'*cin' and applying De Morgan)
+
+------------------------------------------------------------------------
+[7] Prime implicants -- sum(a, b, cin)
+  Number of prime implicants: 4
+    111   a*b*cin                  (3 literals)
+    100   a*b'*cin'                (3 literals)
+    010   a'*b*cin'                (3 literals)
+    001   a'*b'*cin                (3 literals)
+
+[7] Prime implicants -- cout(a, b, cin)
+  Number of prime implicants: 3
+    11-   a*b                      (2 literals)
+    1-1   a*cin                    (2 literals)
+    -11   b*cin                    (2 literals)
+
+------------------------------------------------------------------------
+[8] Essential prime implicants -- sum(a, b, cin)
+  Number of essential prime implicants: 4
+    111   a*b*cin                  (3 literals)
+    100   a*b'*cin'                (3 literals)
+    010   a'*b*cin'                (3 literals)
+    001   a'*b'*cin                (3 literals)
+  minimum cover = 4 essential + 0 other prime(s)
+
+[8] Essential prime implicants -- cout(a, b, cin)
+  Number of essential prime implicants: 3
+    11-   a*b                      (2 literals)
+    1-1   a*cin                    (2 literals)
+    -11   b*cin                    (2 literals)
+  minimum cover = 3 essential + 0 other prime(s)
+
+------------------------------------------------------------------------
+[9] ON-set minterms -- sum(a, b, cin)
+  Number of ON-set minterms: 4   (of 8; don't-cares: 0)
+  Σm(1, 2, 4, 7)
+
+[9] ON-set minterms -- cout(a, b, cin)
+  Number of ON-set minterms: 4   (of 8; don't-cares: 0)
+  Σm(3, 5, 6, 7)
+
+------------------------------------------------------------------------
+[10] OFF-set maxterms -- sum(a, b, cin)
+  Number of OFF-set maxterms: 4   (of 8; don't-cares: 0)
+  ΠM(0, 3, 5, 6)
+
+[10] OFF-set maxterms -- cout(a, b, cin)
+  Number of OFF-set maxterms: 4   (of 8; don't-cares: 0)
+  ΠM(0, 1, 2, 4)
+
+------------------------------------------------------------------------
+[11] Static hazard analysis (custom #1) -- sum(a, b, cin)
+  Minimized SOP: sum = a*b*cin + a*b'*cin' + a'*b*cin' + a'*b'*cin
+  Static-1 hazards in AND-OR realization: 0
+  Minimized POS: sum = (a' + b' + cin) * (a' + b + cin') * (a + b' + cin') * (a + b + cin)
+  Static-0 hazards in OR-AND realization: 0
+
+[11] Static hazard analysis (custom #1) -- cout(a, b, cin)
+  Minimized SOP: cout = a*b + a*cin + b*cin
+  Static-1 hazards in AND-OR realization: 0
+  Minimized POS: cout = (a + b) * (a + cin) * (b + cin)
+  Static-0 hazards in OR-AND realization: 0
+
+------------------------------------------------------------------------
+[12] Implementation cost & delay (custom #2) -- outputs: sum, cout
+  Transistors: NOT = 2, k-input NAND/NOR = 2k, AND/OR = 2k + 2
+  Delay in inverter delays (tau): NOT = 1, NAND/NOR = 1 + 0.25(k-1), AND/OR = NAND/NOR + 1
+
+  Implementation              gates  inputs  transistors  levels   delay
+  ----------------------------------------------------------------------
+  Canonical SOP   AND-OR         12      32           82       3    6.25
+  Minimized SOP   AND-OR         12      28           74       3    6.25
+  Minimized SOP   NAND-NAND      12      28           56       3    4.25
+  Minimized POS   OR-AND         12      28           74       3    6.25
+  Minimized POS   NOR-NOR        12      28           56       3    4.25
+  Hazard-free SOP AND-OR         12      28           74       3    6.25
+
+  Smallest: Minimized SOP NAND-NAND   Fastest: Minimized SOP NAND-NAND
+
+Structural Verilog written to sample_output/full_adder.v
+  module full_adder: 12 gates (AND-OR)
+  circuit check against the truth table: PASS
+  testbench written to sample_output/tb_full_adder.v

@@ -1,0 +1,461 @@
+Design 'bcd7seg'
+  inputs  (4): D3 D2 D1 D0
+  outputs (7): a b c d e f g
+    a: ON=8 OFF=2 DC=6
+    b: ON=8 OFF=2 DC=6
+    c: ON=9 OFF=1 DC=6
+    d: ON=7 OFF=3 DC=6
+    e: ON=4 OFF=6 DC=6
+    f: ON=6 OFF=4 DC=6
+    g: ON=7 OFF=3 DC=6
+------------------------------------------------------------------------
+[1] Canonical SOP -- a(D3, D2, D1, D0)
+  a = Σm(0, 2, 3, 5, 6, 7, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  a = D3'*D2'*D1'*D0' + D3'*D2'*D1*D0' + D3'*D2'*D1*D0 + D3'*D2*D1'*D0 + D3'*D2*D1*D0' + D3'*D2*D1*D0 + D3*D2'*D1'*D0' + D3*D2'*D1'*D0
+  minterms: 8   literals: 32
+
+[1] Canonical SOP -- b(D3, D2, D1, D0)
+  b = Σm(0, 1, 2, 3, 4, 7, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  b = D3'*D2'*D1'*D0' + D3'*D2'*D1'*D0 + D3'*D2'*D1*D0' + D3'*D2'*D1*D0 + D3'*D2*D1'*D0' + D3'*D2*D1*D0 + D3*D2'*D1'*D0' + D3*D2'*D1'*D0
+  minterms: 8   literals: 32
+
+[1] Canonical SOP -- c(D3, D2, D1, D0)
+  c = Σm(0, 1, 3, 4, 5, 6, 7, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  c = D3'*D2'*D1'*D0' + D3'*D2'*D1'*D0 + D3'*D2'*D1*D0 + D3'*D2*D1'*D0' + D3'*D2*D1'*D0 + D3'*D2*D1*D0' + D3'*D2*D1*D0 + D3*D2'*D1'*D0' + D3*D2'*D1'*D0
+  minterms: 9   literals: 36
+
+[1] Canonical SOP -- d(D3, D2, D1, D0)
+  d = Σm(0, 2, 3, 5, 6, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  d = D3'*D2'*D1'*D0' + D3'*D2'*D1*D0' + D3'*D2'*D1*D0 + D3'*D2*D1'*D0 + D3'*D2*D1*D0' + D3*D2'*D1'*D0' + D3*D2'*D1'*D0
+  minterms: 7   literals: 28
+
+[1] Canonical SOP -- e(D3, D2, D1, D0)
+  e = Σm(0, 2, 6, 8) + d(10, 11, 12, 13, 14, 15)
+  e = D3'*D2'*D1'*D0' + D3'*D2'*D1*D0' + D3'*D2*D1*D0' + D3*D2'*D1'*D0'
+  minterms: 4   literals: 16
+
+[1] Canonical SOP -- f(D3, D2, D1, D0)
+  f = Σm(0, 4, 5, 6, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  f = D3'*D2'*D1'*D0' + D3'*D2*D1'*D0' + D3'*D2*D1'*D0 + D3'*D2*D1*D0' + D3*D2'*D1'*D0' + D3*D2'*D1'*D0
+  minterms: 6   literals: 24
+
+[1] Canonical SOP -- g(D3, D2, D1, D0)
+  g = Σm(2, 3, 4, 5, 6, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  g = D3'*D2'*D1*D0' + D3'*D2'*D1*D0 + D3'*D2*D1'*D0' + D3'*D2*D1'*D0 + D3'*D2*D1*D0' + D3*D2'*D1'*D0' + D3*D2'*D1'*D0
+  minterms: 7   literals: 28
+
+------------------------------------------------------------------------
+[2] Canonical POS -- a(D3, D2, D1, D0)
+  a = ΠM(1, 4) + d(10, 11, 12, 13, 14, 15)
+  a = (D3 + D2 + D1 + D0') * (D3 + D2' + D1 + D0)
+  maxterms: 2   literals: 8
+
+[2] Canonical POS -- b(D3, D2, D1, D0)
+  b = ΠM(5, 6) + d(10, 11, 12, 13, 14, 15)
+  b = (D3 + D2' + D1 + D0') * (D3 + D2' + D1' + D0)
+  maxterms: 2   literals: 8
+
+[2] Canonical POS -- c(D3, D2, D1, D0)
+  c = ΠM(2) + d(10, 11, 12, 13, 14, 15)
+  c = (D3 + D2 + D1' + D0)
+  maxterms: 1   literals: 4
+
+[2] Canonical POS -- d(D3, D2, D1, D0)
+  d = ΠM(1, 4, 7) + d(10, 11, 12, 13, 14, 15)
+  d = (D3 + D2 + D1 + D0') * (D3 + D2' + D1 + D0) * (D3 + D2' + D1' + D0')
+  maxterms: 3   literals: 12
+
+[2] Canonical POS -- e(D3, D2, D1, D0)
+  e = ΠM(1, 3, 4, 5, 7, 9) + d(10, 11, 12, 13, 14, 15)
+  e = (D3 + D2 + D1 + D0') * (D3 + D2 + D1' + D0') * (D3 + D2' + D1 + D0) * (D3 + D2' + D1 + D0') * (D3 + D2' + D1' + D0') * (D3' + D2 + D1 + D0')
+  maxterms: 6   literals: 24
+
+[2] Canonical POS -- f(D3, D2, D1, D0)
+  f = ΠM(1, 2, 3, 7) + d(10, 11, 12, 13, 14, 15)
+  f = (D3 + D2 + D1 + D0') * (D3 + D2 + D1' + D0) * (D3 + D2 + D1' + D0') * (D3 + D2' + D1' + D0')
+  maxterms: 4   literals: 16
+
+[2] Canonical POS -- g(D3, D2, D1, D0)
+  g = ΠM(0, 1, 7) + d(10, 11, 12, 13, 14, 15)
+  g = (D3 + D2 + D1 + D0) * (D3 + D2 + D1 + D0') * (D3 + D2' + D1' + D0')
+  maxterms: 3   literals: 12
+
+------------------------------------------------------------------------
+[3] Inverse canonical SOP -- a(D3, D2, D1, D0)
+  a' = Σm(1, 4) + d(10, 11, 12, 13, 14, 15)
+  a' = D3'*D2'*D1'*D0 + D3'*D2*D1'*D0'
+  minterms: 2   literals: 8
+
+[3] Inverse canonical SOP -- b(D3, D2, D1, D0)
+  b' = Σm(5, 6) + d(10, 11, 12, 13, 14, 15)
+  b' = D3'*D2*D1'*D0 + D3'*D2*D1*D0'
+  minterms: 2   literals: 8
+
+[3] Inverse canonical SOP -- c(D3, D2, D1, D0)
+  c' = Σm(2) + d(10, 11, 12, 13, 14, 15)
+  c' = D3'*D2'*D1*D0'
+  minterms: 1   literals: 4
+
+[3] Inverse canonical SOP -- d(D3, D2, D1, D0)
+  d' = Σm(1, 4, 7) + d(10, 11, 12, 13, 14, 15)
+  d' = D3'*D2'*D1'*D0 + D3'*D2*D1'*D0' + D3'*D2*D1*D0
+  minterms: 3   literals: 12
+
+[3] Inverse canonical SOP -- e(D3, D2, D1, D0)
+  e' = Σm(1, 3, 4, 5, 7, 9) + d(10, 11, 12, 13, 14, 15)
+  e' = D3'*D2'*D1'*D0 + D3'*D2'*D1*D0 + D3'*D2*D1'*D0' + D3'*D2*D1'*D0 + D3'*D2*D1*D0 + D3*D2'*D1'*D0
+  minterms: 6   literals: 24
+
+[3] Inverse canonical SOP -- f(D3, D2, D1, D0)
+  f' = Σm(1, 2, 3, 7) + d(10, 11, 12, 13, 14, 15)
+  f' = D3'*D2'*D1'*D0 + D3'*D2'*D1*D0' + D3'*D2'*D1*D0 + D3'*D2*D1*D0
+  minterms: 4   literals: 16
+
+[3] Inverse canonical SOP -- g(D3, D2, D1, D0)
+  g' = Σm(0, 1, 7) + d(10, 11, 12, 13, 14, 15)
+  g' = D3'*D2'*D1'*D0' + D3'*D2'*D1'*D0 + D3'*D2*D1*D0
+  minterms: 3   literals: 12
+
+------------------------------------------------------------------------
+[4] Inverse canonical POS -- a(D3, D2, D1, D0)
+  a' = ΠM(0, 2, 3, 5, 6, 7, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  a' = (D3 + D2 + D1 + D0) * (D3 + D2 + D1' + D0) * (D3 + D2 + D1' + D0') * (D3 + D2' + D1 + D0') * (D3 + D2' + D1' + D0) * (D3 + D2' + D1' + D0') * (D3' + D2 + D1 + D0) * (D3' + D2 + D1 + D0')
+  maxterms: 8   literals: 32
+
+[4] Inverse canonical POS -- b(D3, D2, D1, D0)
+  b' = ΠM(0, 1, 2, 3, 4, 7, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  b' = (D3 + D2 + D1 + D0) * (D3 + D2 + D1 + D0') * (D3 + D2 + D1' + D0) * (D3 + D2 + D1' + D0') * (D3 + D2' + D1 + D0) * (D3 + D2' + D1' + D0') * (D3' + D2 + D1 + D0) * (D3' + D2 + D1 + D0')
+  maxterms: 8   literals: 32
+
+[4] Inverse canonical POS -- c(D3, D2, D1, D0)
+  c' = ΠM(0, 1, 3, 4, 5, 6, 7, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  c' = (D3 + D2 + D1 + D0) * (D3 + D2 + D1 + D0') * (D3 + D2 + D1' + D0') * (D3 + D2' + D1 + D0) * (D3 + D2' + D1 + D0') * (D3 + D2' + D1' + D0) * (D3 + D2' + D1' + D0') * (D3' + D2 + D1 + D0) * (D3' + D2 + D1 + D0')
+  maxterms: 9   literals: 36
+
+[4] Inverse canonical POS -- d(D3, D2, D1, D0)
+  d' = ΠM(0, 2, 3, 5, 6, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  d' = (D3 + D2 + D1 + D0) * (D3 + D2 + D1' + D0) * (D3 + D2 + D1' + D0') * (D3 + D2' + D1 + D0') * (D3 + D2' + D1' + D0) * (D3' + D2 + D1 + D0) * (D3' + D2 + D1 + D0')
+  maxterms: 7   literals: 28
+
+[4] Inverse canonical POS -- e(D3, D2, D1, D0)
+  e' = ΠM(0, 2, 6, 8) + d(10, 11, 12, 13, 14, 15)
+  e' = (D3 + D2 + D1 + D0) * (D3 + D2 + D1' + D0) * (D3 + D2' + D1' + D0) * (D3' + D2 + D1 + D0)
+  maxterms: 4   literals: 16
+
+[4] Inverse canonical POS -- f(D3, D2, D1, D0)
+  f' = ΠM(0, 4, 5, 6, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  f' = (D3 + D2 + D1 + D0) * (D3 + D2' + D1 + D0) * (D3 + D2' + D1 + D0') * (D3 + D2' + D1' + D0) * (D3' + D2 + D1 + D0) * (D3' + D2 + D1 + D0')
+  maxterms: 6   literals: 24
+
+[4] Inverse canonical POS -- g(D3, D2, D1, D0)
+  g' = ΠM(2, 3, 4, 5, 6, 8, 9) + d(10, 11, 12, 13, 14, 15)
+  g' = (D3 + D2 + D1' + D0) * (D3 + D2 + D1' + D0') * (D3 + D2' + D1 + D0) * (D3 + D2' + D1 + D0') * (D3 + D2' + D1' + D0) * (D3' + D2 + D1 + D0) * (D3' + D2 + D1 + D0')
+  maxterms: 7   literals: 28
+
+------------------------------------------------------------------------
+[5] Literal-minimized SOP -- a(D3, D2, D1, D0)
+  a = D3 + D1 + D2*D0 + D2'*D0'
+  terms: 4   literals: 6
+  canonical SOP literals: 32  ->  saved 26 literals (81.2%)
+
+[5] Literal-minimized SOP -- b(D3, D2, D1, D0)
+  b = D2' + D1*D0 + D1'*D0'
+  terms: 3   literals: 5
+  canonical SOP literals: 32  ->  saved 27 literals (84.4%)
+
+[5] Literal-minimized SOP -- c(D3, D2, D1, D0)
+  c = D2 + D1' + D0
+  terms: 3   literals: 3
+  canonical SOP literals: 36  ->  saved 33 literals (91.7%)
+
+[5] Literal-minimized SOP -- d(D3, D2, D1, D0)
+  d = D3 + D2'*D1 + D2'*D0' + D1*D0' + D2*D1'*D0
+  terms: 5   literals: 10
+  canonical SOP literals: 28  ->  saved 18 literals (64.3%)
+
+[5] Literal-minimized SOP -- e(D3, D2, D1, D0)
+  e = D2'*D0' + D1*D0'
+  terms: 2   literals: 4
+  canonical SOP literals: 16  ->  saved 12 literals (75.0%)
+
+[5] Literal-minimized SOP -- f(D3, D2, D1, D0)
+  f = D3 + D2*D1' + D2*D0' + D1'*D0'
+  terms: 4   literals: 7
+  canonical SOP literals: 24  ->  saved 17 literals (70.8%)
+
+[5] Literal-minimized SOP -- g(D3, D2, D1, D0)
+  g = D3 + D2*D1' + D2*D0' + D2'*D1
+  terms: 4   literals: 7
+  canonical SOP literals: 28  ->  saved 21 literals (75.0%)
+
+------------------------------------------------------------------------
+[6] Literal-minimized POS -- a(D3, D2, D1, D0)
+  a = (D2' + D1 + D0) * (D3 + D2 + D1 + D0')
+  clauses: 2   literals: 7
+  canonical POS literals: 8  ->  saved 1 literals (12.5%)
+  (from minimizing a' = D2*D1'*D0' + D3'*D2'*D1'*D0 and applying De Morgan)
+
+[6] Literal-minimized POS -- b(D3, D2, D1, D0)
+  b = (D2' + D1' + D0) * (D2' + D1 + D0')
+  clauses: 2   literals: 6
+  canonical POS literals: 8  ->  saved 2 literals (25.0%)
+  (from minimizing b' = D2*D1*D0' + D2*D1'*D0 and applying De Morgan)
+
+[6] Literal-minimized POS -- c(D3, D2, D1, D0)
+  c = (D2 + D1' + D0)
+  clauses: 1   literals: 3
+  canonical POS literals: 4  ->  saved 1 literals (25.0%)
+  (from minimizing c' = D2'*D1*D0' and applying De Morgan)
+
+[6] Literal-minimized POS -- d(D3, D2, D1, D0)
+  d = (D2' + D1' + D0') * (D2' + D1 + D0) * (D3 + D2 + D1 + D0')
+  clauses: 3   literals: 10
+  canonical POS literals: 12  ->  saved 2 literals (16.7%)
+  (from minimizing d' = D2*D1*D0 + D2*D1'*D0' + D3'*D2'*D1'*D0 and applying De Morgan)
+
+[6] Literal-minimized POS -- e(D3, D2, D1, D0)
+  e = D0' * (D2' + D1)
+  clauses: 2   literals: 3
+  canonical POS literals: 24  ->  saved 21 literals (87.5%)
+  (from minimizing e' = D0 + D2*D1' and applying De Morgan)
+
+[6] Literal-minimized POS -- f(D3, D2, D1, D0)
+  f = (D2 + D1') * (D1' + D0') * (D3 + D2 + D0')
+  clauses: 3   literals: 7
+  canonical POS literals: 16  ->  saved 9 literals (56.2%)
+  (from minimizing f' = D2'*D1 + D1*D0 + D3'*D2'*D0 and applying De Morgan)
+
+[6] Literal-minimized POS -- g(D3, D2, D1, D0)
+  g = (D3 + D2 + D1) * (D2' + D1' + D0')
+  clauses: 2   literals: 6
+  canonical POS literals: 12  ->  saved 6 literals (50.0%)
+  (from minimizing g' = D3'*D2'*D1' + D2*D1*D0 and applying De Morgan)
+
+------------------------------------------------------------------------
+[7] Prime implicants -- a(D3, D2, D1, D0)
+  Number of prime implicants: 4
+    1---   D3                       (1 literals)
+    --1-   D1                       (1 literals)
+    -1-1   D2*D0                    (2 literals)
+    -0-0   D2'*D0'                  (2 literals)
+
+[7] Prime implicants -- b(D3, D2, D1, D0)
+  Number of prime implicants: 4
+    1---   D3                       (1 literals)
+    -0--   D2'                      (1 literals)
+    --11   D1*D0                    (2 literals)
+    --00   D1'*D0'                  (2 literals)
+
+[7] Prime implicants -- c(D3, D2, D1, D0)
+  Number of prime implicants: 4
+    1---   D3                       (1 literals)
+    -1--   D2                       (1 literals)
+    --0-   D1'                      (1 literals)
+    ---1   D0                       (1 literals)
+
+[7] Prime implicants -- d(D3, D2, D1, D0)
+  Number of prime implicants: 5
+    1---   D3                       (1 literals)
+    -01-   D2'*D1                   (2 literals)
+    -0-0   D2'*D0'                  (2 literals)
+    --10   D1*D0'                   (2 literals)
+    -101   D2*D1'*D0                (3 literals)
+
+[7] Prime implicants -- e(D3, D2, D1, D0)
+  Number of prime implicants: 3
+    1--0   D3*D0'                   (2 literals)
+    -0-0   D2'*D0'                  (2 literals)
+    --10   D1*D0'                   (2 literals)
+
+[7] Prime implicants -- f(D3, D2, D1, D0)
+  Number of prime implicants: 4
+    1---   D3                       (1 literals)
+    -10-   D2*D1'                   (2 literals)
+    -1-0   D2*D0'                   (2 literals)
+    --00   D1'*D0'                  (2 literals)
+
+[7] Prime implicants -- g(D3, D2, D1, D0)
+  Number of prime implicants: 5
+    1---   D3                       (1 literals)
+    -10-   D2*D1'                   (2 literals)
+    -1-0   D2*D0'                   (2 literals)
+    -01-   D2'*D1                   (2 literals)
+    --10   D1*D0'                   (2 literals)
+
+------------------------------------------------------------------------
+[8] Essential prime implicants -- a(D3, D2, D1, D0)
+  Number of essential prime implicants: 4
+    1---   D3                       (1 literals)
+    --1-   D1                       (1 literals)
+    -1-1   D2*D0                    (2 literals)
+    -0-0   D2'*D0'                  (2 literals)
+  minimum cover = 4 essential + 0 other prime(s)
+
+[8] Essential prime implicants -- b(D3, D2, D1, D0)
+  Number of essential prime implicants: 3
+    -0--   D2'                      (1 literals)
+    --11   D1*D0                    (2 literals)
+    --00   D1'*D0'                  (2 literals)
+  minimum cover = 3 essential + 0 other prime(s)
+
+[8] Essential prime implicants -- c(D3, D2, D1, D0)
+  Number of essential prime implicants: 3
+    -1--   D2                       (1 literals)
+    --0-   D1'                      (1 literals)
+    ---1   D0                       (1 literals)
+  minimum cover = 3 essential + 0 other prime(s)
+
+[8] Essential prime implicants -- d(D3, D2, D1, D0)
+  Number of essential prime implicants: 5
+    1---   D3                       (1 literals)
+    -01-   D2'*D1                   (2 literals)
+    -0-0   D2'*D0'                  (2 literals)
+    --10   D1*D0'                   (2 literals)
+    -101   D2*D1'*D0                (3 literals)
+  minimum cover = 5 essential + 0 other prime(s)
+
+[8] Essential prime implicants -- e(D3, D2, D1, D0)
+  Number of essential prime implicants: 2
+    -0-0   D2'*D0'                  (2 literals)
+    --10   D1*D0'                   (2 literals)
+  minimum cover = 2 essential + 0 other prime(s)
+
+[8] Essential prime implicants -- f(D3, D2, D1, D0)
+  Number of essential prime implicants: 4
+    1---   D3                       (1 literals)
+    -10-   D2*D1'                   (2 literals)
+    -1-0   D2*D0'                   (2 literals)
+    --00   D1'*D0'                  (2 literals)
+  minimum cover = 4 essential + 0 other prime(s)
+
+[8] Essential prime implicants -- g(D3, D2, D1, D0)
+  Number of essential prime implicants: 3
+    1---   D3                       (1 literals)
+    -10-   D2*D1'                   (2 literals)
+    -01-   D2'*D1                   (2 literals)
+  minimum cover = 3 essential + 1 other prime(s)
+
+------------------------------------------------------------------------
+[9] ON-set minterms -- a(D3, D2, D1, D0)
+  Number of ON-set minterms: 8   (of 16; don't-cares: 6)
+  Σm(0, 2, 3, 5, 6, 7, 8, 9)
+
+[9] ON-set minterms -- b(D3, D2, D1, D0)
+  Number of ON-set minterms: 8   (of 16; don't-cares: 6)
+  Σm(0, 1, 2, 3, 4, 7, 8, 9)
+
+[9] ON-set minterms -- c(D3, D2, D1, D0)
+  Number of ON-set minterms: 9   (of 16; don't-cares: 6)
+  Σm(0, 1, 3, 4, 5, 6, 7, 8, 9)
+
+[9] ON-set minterms -- d(D3, D2, D1, D0)
+  Number of ON-set minterms: 7   (of 16; don't-cares: 6)
+  Σm(0, 2, 3, 5, 6, 8, 9)
+
+[9] ON-set minterms -- e(D3, D2, D1, D0)
+  Number of ON-set minterms: 4   (of 16; don't-cares: 6)
+  Σm(0, 2, 6, 8)
+
+[9] ON-set minterms -- f(D3, D2, D1, D0)
+  Number of ON-set minterms: 6   (of 16; don't-cares: 6)
+  Σm(0, 4, 5, 6, 8, 9)
+
+[9] ON-set minterms -- g(D3, D2, D1, D0)
+  Number of ON-set minterms: 7   (of 16; don't-cares: 6)
+  Σm(2, 3, 4, 5, 6, 8, 9)
+
+------------------------------------------------------------------------
+[10] OFF-set maxterms -- a(D3, D2, D1, D0)
+  Number of OFF-set maxterms: 2   (of 16; don't-cares: 6)
+  ΠM(1, 4)
+
+[10] OFF-set maxterms -- b(D3, D2, D1, D0)
+  Number of OFF-set maxterms: 2   (of 16; don't-cares: 6)
+  ΠM(5, 6)
+
+[10] OFF-set maxterms -- c(D3, D2, D1, D0)
+  Number of OFF-set maxterms: 1   (of 16; don't-cares: 6)
+  ΠM(2)
+
+[10] OFF-set maxterms -- d(D3, D2, D1, D0)
+  Number of OFF-set maxterms: 3   (of 16; don't-cares: 6)
+  ΠM(1, 4, 7)
+
+[10] OFF-set maxterms -- e(D3, D2, D1, D0)
+  Number of OFF-set maxterms: 6   (of 16; don't-cares: 6)
+  ΠM(1, 3, 4, 5, 7, 9)
+
+[10] OFF-set maxterms -- f(D3, D2, D1, D0)
+  Number of OFF-set maxterms: 4   (of 16; don't-cares: 6)
+  ΠM(1, 2, 3, 7)
+
+[10] OFF-set maxterms -- g(D3, D2, D1, D0)
+  Number of OFF-set maxterms: 3   (of 16; don't-cares: 6)
+  ΠM(0, 1, 7)
+
+------------------------------------------------------------------------
+[11] Static hazard analysis (custom #1) -- a(D3, D2, D1, D0)
+  Minimized SOP: a = D3 + D1 + D2*D0 + D2'*D0'
+  Static-1 hazards in AND-OR realization: 0
+  Minimized POS: a = (D2' + D1 + D0) * (D3 + D2 + D1 + D0')
+  Static-0 hazards in OR-AND realization: 0
+
+[11] Static hazard analysis (custom #1) -- b(D3, D2, D1, D0)
+  Minimized SOP: b = D2' + D1*D0 + D1'*D0'
+  Static-1 hazards in AND-OR realization: 0
+  Minimized POS: b = (D2' + D1' + D0) * (D2' + D1 + D0')
+  Static-0 hazards in OR-AND realization: 0
+
+[11] Static hazard analysis (custom #1) -- c(D3, D2, D1, D0)
+  Minimized SOP: c = D2 + D1' + D0
+  Static-1 hazards in AND-OR realization: 0
+  Minimized POS: c = (D2 + D1' + D0)
+  Static-0 hazards in OR-AND realization: 0
+
+[11] Static hazard analysis (custom #1) -- d(D3, D2, D1, D0)
+  Minimized SOP: d = D3 + D2'*D1 + D2'*D0' + D1*D0' + D2*D1'*D0
+  Static-1 hazards in AND-OR realization: 0
+  Minimized POS: d = (D2' + D1' + D0') * (D2' + D1 + D0) * (D3 + D2 + D1 + D0')
+  Static-0 hazards in OR-AND realization: 0
+
+[11] Static hazard analysis (custom #1) -- e(D3, D2, D1, D0)
+  Minimized SOP: e = D2'*D0' + D1*D0'
+  Static-1 hazards in AND-OR realization: 0
+  Minimized POS: e = D0' * (D2' + D1)
+  Static-0 hazards in OR-AND realization: 0
+
+[11] Static hazard analysis (custom #1) -- f(D3, D2, D1, D0)
+  Minimized SOP: f = D3 + D2*D1' + D2*D0' + D1'*D0'
+  Static-1 hazards in AND-OR realization: 0
+  Minimized POS: f = (D2 + D1') * (D1' + D0') * (D3 + D2 + D0')
+  Static-0 hazards in OR-AND realization: 0
+
+[11] Static hazard analysis (custom #1) -- g(D3, D2, D1, D0)
+  Minimized SOP: g = D3 + D2*D1' + D2*D0' + D2'*D1
+  Static-1 hazards in AND-OR realization: 1
+    m2 (0010) <-> m6 (0110): D2 toggles with D3=0, D1=1, D0=0
+  Hazard-free SOP: g = D3 + D2*D1' + D2*D0' + D2'*D1 + D1*D0'
+    (+1 consensus term(s), +2 literals)
+  Minimized POS: g = (D3 + D2 + D1) * (D2' + D1' + D0')
+  Static-0 hazards in OR-AND realization: 0
+
+------------------------------------------------------------------------
+[12] Implementation cost & delay (custom #2) -- outputs: a, b, c, d, e, f, g
+  Transistors: NOT = 2, k-input NAND/NOR = 2k, AND/OR = 2k + 2
+  Delay in inverter delays (tau): NOT = 1, NAND/NOR = 1 + 0.25(k-1), AND/OR = NAND/NOR + 1
+
+  Implementation              gates  inputs  transistors  levels   delay
+  ----------------------------------------------------------------------
+  Canonical SOP   AND-OR         21      93          220       3    7.75
+  Minimized SOP   AND-OR         19      47          126       3    6.50
+  Minimized SOP   NAND-NAND      20      48           96       3    4.50
+  Minimized POS   OR-AND         20      48          130       3    6.25
+  Minimized POS   NOR-NOR        21      49           98       3    4.25
+  Hazard-free SOP AND-OR         19      48          128       3    6.50
+
+  Smallest: Minimized SOP NAND-NAND   Fastest: Minimized POS NOR-NOR
+
+Structural Verilog written to sample_output/bcd7seg.v
+  module bcd7seg: 19 gates (AND-OR)
+  circuit check against the truth table: PASS
+  testbench written to sample_output/tb_bcd7seg.v
